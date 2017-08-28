@@ -1,24 +1,65 @@
 const request = require('request');
+const parseString = require('xml2js').parseString;
 
-const urls = [
-  'http://www.whezh.com/',
-  'http://www.whezh.com/2017/08/software-install/',
-];
+const SITE_URL = 'your_site'; // 提交到百度的网址
+const TOKEN = 'your_token'; // 百度站长主动推送token
 
-const options = {
-  url: 'http://data.zz.baidu.com/urls?site=www.whezh.com&token=USUmUVxSr6fLvqzM',
-  method: 'POST',
-  headers: {
-    'Content-Type': 'text/plain',
-  },
-  body: urls.join('\n')
-};
+fetchUrlDatas().then(urls => push(urls));
 
-request(options, (err, res, body) => {
-  if (err) {
-    console.error(`请求遇到问题: ${err.message}`);
-  } else {
-    let result = JSON.parse(body);
-    console.log(`成功推送 ${result.success} 条url，今天剩余 ${result.remain} 条可推送url。`);
+function push(urls) {
+  if (!urls || !urls.length) {
+    console.error('欲推送的地址数目不能为空');
+    return;
   }
-});
+
+  const options = {
+    url: `http://data.zz.baidu.com/urls?site=${SITE_URL}&token=${TOKEN}`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    body: urls.join('\n')
+  };
+
+  request(options, (err, res, body) => {
+    if (err) {
+      console.error(`推送Url时遇到问题: ${err.message}`);
+    } else {
+      let result = JSON.parse(body);
+      console.log(`成功推送 ${result.success} 条url，今天剩余 ${result.remain} 条可推送url。`);
+    }
+  });
+}
+
+function fetchUrlDatas() {
+  return new Promise((resolve, reject) => {
+    request(`http://${SITE_URL}/sitemap.xml`, (err, res, body) => {
+      if (err) {
+        console.error(`获取sitemap时遇到问题: ${err.message}`);
+        reject(err);
+      } else {
+        extractUrls(body).then(
+          urls => resolve(urls),
+          err => reject(err)
+        );
+      }
+    });
+  });
+}
+
+function extractUrls(body) {
+  return new Promise((resolve, reject) => {
+    parseString(body, (err, result) => {
+      if (err) {
+        console.error(`解析sitemap时遇到问题：${err.message}`);
+        reject(err);
+      } else {
+        let urls = result.urlset.url.map((url) => {
+          return url.loc[0];
+        });
+        console.log(`从sitemap中提取${urls.length}个url：\n${urls.join('\n')}`);
+        resolve(urls);
+      }
+    });
+  })
+}

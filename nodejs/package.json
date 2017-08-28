@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "xml2js": "^0.4.19"
   }
 }
