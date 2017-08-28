@@ -1,0 +1,8 @@
+{
+  "name": "scripts-nodejs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
