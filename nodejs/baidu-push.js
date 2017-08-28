@@ -1,8 +1,8 @@
 const request = require('request');
 const parseString = require('xml2js').parseString;
 
-const SITE_URL = 'your_site'; // 提交到百度的网址
-const TOKEN = 'your_token'; // 百度站长主动推送token
+const URL = process.env.URL; // 提交到百度的网址
+const TOKEN = process.env.TOKEN; // 百度站长主动推送token
 
 fetchUrlDatas().then(urls => push(urls));
 
@@ -13,7 +13,7 @@ function push(urls) {
   }
 
   const options = {
-    url: `http://data.zz.baidu.com/urls?site=${SITE_URL}&token=${TOKEN}`,
+    url: `http://data.zz.baidu.com/urls?site=${URL}&token=${TOKEN}`,
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain',
@@ -33,7 +33,7 @@ function push(urls) {
 
 function fetchUrlDatas() {
   return new Promise((resolve, reject) => {
-    request(`http://${SITE_URL}/sitemap.xml`, (err, res, body) => {
+    request(`http://${URL}/sitemap.xml`, (err, res, body) => {
       if (err) {
         console.error(`获取sitemap时遇到问题: ${err.message}`);
         reject(err);
