@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+console.log(`[${new Date().toLocaleString()}] -- 开始推送`);
 const request = require('request');
 const parseString = require('xml2js').parseString;
 
@@ -28,7 +29,8 @@ function push(urls) {
       console.error(`推送Url时遇到问题: ${err.message}`);
     } else {
       let result = JSON.parse(body);
-      console.log(`成功推送 ${result.success} 条url，今天剩余 ${result.remain} 条可推送url。`);
+      console.log(`[${new Date().toLocaleString()}] -- 推送完成。成功推送 ${result.success} 条url，今天剩余 ${result.remain} 条可推送url。`);
+      console.log('------------------------------------');
     }
   });
 }
