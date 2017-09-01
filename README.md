@@ -19,15 +19,17 @@ $ git clone git@github.com:hezhii/scripts.git
 
 <h3 id="1">百度主动推送</h3>
 
-[source](https://github.com/hezhii/scripts/blob/master/nodejs/baidu-push.js)
+[source](https://github.com/hezhii/scripts/blob/master/nodejs/pushurl/index.js)
 
 这个脚本会抓取指定网站的站点地图，并解析其中的 url，然后将解析出来的 url 主动推送到百度。通过下面的方式使用：
 
 ```bash
-$ cd nodejs
-$ npm install
-$ URL=<your_site_url> <TOKEN=baidu_token> node baidu_push.js
+$ cd nodejs/pushurl
+$ yarn install
+$ URL=<your_site_url> TOKEN=<baidu_token> node index.js
 ```
+
+**注意**：运行此脚本需要安装 Node.js 和 Yarn。
 
 <h3 id="2">sshfs 挂载远程目录</h3>
 
