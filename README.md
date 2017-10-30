@@ -16,6 +16,7 @@ $ git clone git@github.com:hezhii/scripts.git
 2. [sshfs 挂载远程目录](#2)
 3. [node.js 守护进程](#3)
 4. [应用开机启动](#4)
+4. [为了健康](#5)
 
 <h3 id="1">百度主动推送</h3>
 
@@ -58,3 +59,9 @@ $ ./nodejs_daemon.sh
 [source](https://github.com/hezhii/scripts/blob/master/shell/start_work.sh)
 
 这个脚本用来帮助我批量的打开应用。
+
+<h3 id="5">为了健康</h3>
+
+[source](https://github.com/hezhii/scripts/blob/master/shell/take_a_reset.sh)
+
+长时间一动不动看电脑对身体不好哦，稍微活动一下吧。
