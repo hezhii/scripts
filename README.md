@@ -16,7 +16,8 @@ $ git clone git@github.com:hezhii/scripts.git
 2. [sshfs 挂载远程目录](#2)
 3. [node.js 守护进程](#3)
 4. [应用开机启动](#4)
-4. [为了健康](#5)
+5. [为了健康](#5)
+6. [静态资源打包上传到服务器](#6)
 
 <h3 id="1">百度主动推送</h3>
 
@@ -27,7 +28,7 @@ $ git clone git@github.com:hezhii/scripts.git
 ```bash
 $ cd nodejs/pushurl
 $ yarn install
-$ URL=<your_site_url> TOKEN=<baidu_token> node index.js
+$ URL="your_site_url" TOKEN="baidu_token" node index.js
 ```
 
 **注意**：运行此脚本需要安装 Node.js 和 Yarn。
@@ -40,7 +41,7 @@ $ URL=<your_site_url> TOKEN=<baidu_token> node index.js
 
 ```bash
 $ cd shell
-$ ./mount.sh <host> <port>
+$ ./mount.sh "host" "port"
 ```
 
 <h3 id="3">node.js 守护进程</h3>
@@ -65,3 +66,9 @@ $ ./nodejs_daemon.sh
 [source](https://github.com/hezhii/scripts/blob/master/shell/take_a_reset.sh)
 
 长时间一动不动看电脑对身体不好哦，稍微活动一下吧。
+
+<h3 id="6">静态资源打包上传到服务器</h3>
+
+[source](https://github.com/hezhii/scripts/blob/master/nodejs/upload_static.js)
+
+页面开发完毕之后，经常需要上传到服务器中，此脚本完成页面的构建、打包、上传服务器并解压操作。
